@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
+builder.Services.AddTransient<IWeatherSummariesService, WeatherSummariesService>();
 
 var app = builder.Build();
 

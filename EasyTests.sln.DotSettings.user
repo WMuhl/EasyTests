@@ -1,8 +1,4 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=953052fc_002D3191_002D49bb_002Dbf1d_002D11e0f1119e06/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetWeatherForecast_None_Returns5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::F1ACDC1A-A4BE-4D48-B4B8-7A2A59585166::net6.0::EasyTests.Tests.Services.WeatherForecastServiceTests.GetWeatherForecast_None_Returns5&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::F1ACDC1A-A4BE-4D48-B4B8-7A2A59585166::net6.0::EasyTests.Tests.Services.WeatherForecastServiceTests.GetWeatherForecast_None_RespectLimits&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::F1ACDC1A-A4BE-4D48-B4B8-7A2A59585166::net6.0::EasyTests.Tests.Services.WeatherForecastServiceTests.GetWeatherForecast_None_NotNull&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Project Location="/Users/waldemar/Repos/EasyTests/EasyTests.Tests" Presentation="&amp;lt;EasyTests.Tests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
