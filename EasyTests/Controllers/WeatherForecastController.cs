@@ -1,3 +1,4 @@
+using EasyTests.Models;
 using EasyTests.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ public class WeatherForecastController : ControllerBase
         _forecastService = forecastService;
     }
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<WeatherSummary> Get()
     {
         return _forecastService.GetWeatherForecast();
     }

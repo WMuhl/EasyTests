@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using EasyTests.Models;
 using EasyTests.Services;
 using FluentAssertions;
 using Moq;
@@ -16,8 +15,8 @@ public class WeatherForecastServiceTests
     public WeatherForecastServiceTests()
     {
         _weatherSummariesServiceMock
-            .Setup(x => x.GetWeatherSummaries())
-            .Returns(new[] {"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"})
+            .Setup(x => x.GetWeatherSummaryDescription(It.IsAny<WeatherPrediction>()))
+            .Returns("A string describing the weather")
             .Verifiable();
         _testClass = new WeatherForecastService(_weatherSummariesServiceMock.Object);
     }
@@ -52,7 +51,7 @@ public class WeatherForecastServiceTests
         // act
         var response = _testClass.GetWeatherForecast();
         // assert
-        response.Max(x => x.TemperatureC).Should().BeInRange(-20, 55);
+        response.Max(x => x.WeatherPrediction.TemperatureC).Should().BeInRange(-20, 55);
     }
     
     [Fact]
@@ -64,20 +63,6 @@ public class WeatherForecastServiceTests
         var response = _testClass.GetWeatherForecast();
         
         // assert
-        _weatherSummariesServiceMock.Verify(x => x.GetWeatherSummaries(), Times.Once);
-    }
-    
-    [Fact]
-    public void GetWeatherForecast_WeatherSummariesEmpty_ThrowsIndexOutOfRangeException()
-    {
-        // arrange
-        _weatherSummariesServiceMock.Setup(x => x.GetWeatherSummaries())
-            .Returns(Array.Empty<string>());
-        
-        // act
-        Func<IEnumerable<WeatherForecast>> action = () => _testClass.GetWeatherForecast();
-       
-        // assert
-        action.Should().Throw<IndexOutOfRangeException>();
+        _weatherSummariesServiceMock.Verify(x => x.GetWeatherSummaryDescription(It.IsAny<WeatherPrediction>()), Times.Exactly(5));
     }
 }

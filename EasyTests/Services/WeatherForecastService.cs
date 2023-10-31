@@ -1,8 +1,10 @@
+using EasyTests.Models;
+
 namespace EasyTests.Services;
 
 public interface IWeatherForecastService
 {
-    IEnumerable<WeatherForecast> GetWeatherForecast();
+    IEnumerable<WeatherSummary> GetWeatherForecast();
 }
 
 public class WeatherForecastService : IWeatherForecastService
@@ -14,19 +16,30 @@ public class WeatherForecastService : IWeatherForecastService
         _weatherSummariesService = weatherSummariesService;
     }
     
-    public IEnumerable<WeatherForecast> GetWeatherForecast()
+    public IEnumerable<WeatherSummary> GetWeatherForecast()
     {
-        var weatherSummaries = _weatherSummariesService.GetWeatherSummaries();
-
-        if (!weatherSummaries.Any())
-            throw new IndexOutOfRangeException();
-        
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var forecast = Enumerable.Range(1, 5).Select(index => new WeatherSummary
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = weatherSummaries[Random.Shared.Next(weatherSummaries.Length)]
+                WeatherPrediction = GetWeatherPredictionForDate(DateTime.Now.AddDays(index))
             })
             .ToArray();
+
+        foreach (var weatherSummary in forecast)
+        {
+            weatherSummary.Summary = _weatherSummariesService.GetWeatherSummaryDescription(weatherSummary.WeatherPrediction);
+        }
+
+        return forecast;
+    }
+
+    private WeatherPrediction GetWeatherPredictionForDate(DateTime date)
+    {
+        return new WeatherPrediction
+        {
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Precipitation = Random.Shared.Next(0, 100),
+            Date = date
+        };
     }
 }
